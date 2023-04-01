@@ -1,56 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const contactsOperations = require("../../models/contacts");
+const ctrl = require("../../controllers");
+const { validation, ctrlWrapper } = require("../../middlewares");
+const contactsSchema = require("../../schema");
 
-router.get("/", async (req, res, next) => {
-  try {
-    const contacts = await contactsOperations.listContacts();
-    res.json({
-      status: "success",
-      code: 200,
-      data: {
-        result: contacts,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+const validateMiddleware = validation(contactsSchema);
 
-router.get("/:contactId", async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const result = await contactsOperations.getContactsByid(contactId);
+router.get("/", ctrlWrapper(ctrl.getAllContacts));
 
-    if (!result) {
-      const error = new Error(`Contact width id=${contactId} is not found`);
-      error.status = 404;
-      throw error;
-    }
+router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
 
-    res.json({
-      status: "success",
-      code: 200,
-      data: {
-        result: result,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/", validateMiddleware, ctrlWrapper(ctrl.addContact));
 
-router.post("/", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
+router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
 
-router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
-
-router.put("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
+router.put("/:contactId", validateMiddleware, ctrlWrapper(ctrl.updateContact));
 
 module.exports = router;
