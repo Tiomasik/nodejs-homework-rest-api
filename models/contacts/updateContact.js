@@ -9,8 +9,7 @@ const updateContact = async (contactId, body) => {
     return null;
   }
 
-  const oldContact = allContacts.find((contact) => contact.id === contactId);
-  const newContact = { ...oldContact, ...body };
+  const newContact = { ...allContacts[index], ...body };
   allContacts.splice(index, 1, newContact);
   await updateListContacts(allContacts);
   return newContact;
