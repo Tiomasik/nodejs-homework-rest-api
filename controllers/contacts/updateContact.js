@@ -2,8 +2,7 @@ const contactsOperations = require("../../models/contacts");
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
-  const body = { ...req.body, contactId };
-  const result = await contactsOperations.updateContact(body);
+  const result = await contactsOperations.updateContact(contactId, req.body);
 
   res.json({
     status: "success",
