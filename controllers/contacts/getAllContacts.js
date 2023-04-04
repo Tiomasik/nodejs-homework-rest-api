@@ -6,9 +6,7 @@ const getAllContacts = async (__, res) => {
   res.json({
     status: "success",
     code: 200,
-    data: {
-      data: contacts,
-    },
+    data: contacts,
   });
 };
 

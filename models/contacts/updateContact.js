@@ -3,7 +3,7 @@ const updateListContacts = require("./updateListContacts");
 
 const updateContact = async (contactId, body) => {
   const allContacts = await listContacts();
-  const index = allContacts.findIndex((contact) => contact.id === contactId);
+  const index = allContacts.findIndex((contact) => contact._id === contactId);
 
   if (index === -1) {
     return null;

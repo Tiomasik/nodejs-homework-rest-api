@@ -7,9 +7,7 @@ const updateContact = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    data: {
-      data: result,
-    },
+    data: result,
   });
 };
 

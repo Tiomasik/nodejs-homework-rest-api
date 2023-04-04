@@ -14,9 +14,7 @@ const deleteContact = async (req, res) => {
     status: "success",
     code: 200,
     message: `Contact width id=${contactId} was deleted`,
-    data: {
-      data: result,
-    },
+    data: result,
   });
 };
 
