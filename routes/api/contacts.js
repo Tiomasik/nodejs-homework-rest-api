@@ -9,14 +9,22 @@ router.get("/", ctrlWrapper(ctrl.getAllContacts));
 
 router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getContactById));
 
-router.post("/", validation(schema("post")), ctrlWrapper(ctrl.addContact));
+router.post("/", validation(schema.postSchema), ctrlWrapper(ctrl.addContact));
 
-// router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
+router.put(
+  "/:contactId",
+  isValidId,
+  validation(schema.putSchema),
+  ctrlWrapper(ctrl.updateContact)
+);
 
-// router.put(
-//   "/:contactId", isValidId,
-//   validation(contactsSchema("put")),
-//   ctrlWrapper(ctrl.updateContact)
-// );
+router.patch(
+  "/:contactId/favorite",
+  isValidId,
+  validation(schema.patchFavoriteSchema),
+  ctrlWrapper(ctrl.updateStatusContact)
+);
+
+router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
 
 module.exports = router;

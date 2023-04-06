@@ -13,6 +13,7 @@ const contactSchema = new Schema(
     },
     email: {
       type: String,
+      match: /\w+@\w+\.\w{2,3}$/,
     },
     phone: {
       type: String,
@@ -30,24 +31,24 @@ contactSchema.post("save", mongooseError);
 
 const Contact = model("contact", contactSchema);
 
-const schema = (method) => {
-  if (method === "post") {
-    const contactsSchema = Joi.object({
-      name: Joi.string().required(),
-      email: Joi.string().email().required(),
-      phone: Joi.string().pattern(validateNumber).required(),
-      favorite: Joi.boolean().default(false),
-    });
-    return contactsSchema;
-  } else {
-    const contactsSchema = Joi.object({
-      name: Joi.string(),
-      email: Joi.string().email(),
-      phone: Joi.string().pattern(validateNumber),
-      favorite: Joi.boolean().default(false),
-    });
-    return contactsSchema;
-  }
-};
+const postSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().pattern(validateNumber).required(),
+  favorite: Joi.boolean().default(false),
+});
+
+const putSchema = Joi.object({
+  name: Joi.string(),
+  email: Joi.string().email(),
+  phone: Joi.string().pattern(validateNumber),
+  favorite: Joi.boolean().default(false),
+});
+
+const patchFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
+const schema = { postSchema, putSchema, patchFavoriteSchema };
 
 module.exports = { schema, Contact };
