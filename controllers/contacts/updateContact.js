@@ -3,9 +3,14 @@ const { Contact } = require("../../models/contact");
 
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-    new: true,
-  });
+  const { _id: owner } = req.user;
+  const result = await Contact.findOneAndUpdate(
+    { contactId, owner },
+    req.body,
+    {
+      new: true,
+    }
+  );
 
   if (!result) {
     throw new NotFound(`Contact width id=${contactId} is not found`);

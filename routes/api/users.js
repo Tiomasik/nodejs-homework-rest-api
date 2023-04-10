@@ -21,6 +21,18 @@ router.post(
   ctrlWrapper(ctrlUsers.loginUser)
 );
 
+router.get(
+  "/current",
+  ctrlUsers.authenticate,
+  ctrlWrapper(ctrlUsers.getCurrent)
+);
+
+router.post(
+  "/logout",
+  ctrlUsers.authenticate,
+  ctrlWrapper(ctrlUsers.logoutUser)
+);
+
 // router.put(
 //   "/:contactId",
 //   isValidId,

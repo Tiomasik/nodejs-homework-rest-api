@@ -4,9 +4,10 @@ const { Contact } = require("../../models/contact");
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findById(contactId);
+  const { _id: owner } = req.user;
+  const result = await Contact.find({ contactId, owner });
 
-  if (!result) {
+  if (result.length === 0) {
     throw new NotFound(`Contact width id=${contactId} is not found`);
   }
 
