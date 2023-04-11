@@ -24,12 +24,8 @@ app.use((__, res) => {
 app.use((err, req, res, next) => {
   const { status = 500, message = "server error" } = err;
   res.status(status).json({
-    status: "error",
-    code: status,
-    ContentType: "application/json",
-    ResponseBody: {
-      message,
-    },
+    status,
+    message,
   });
 });
 

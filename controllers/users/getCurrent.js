@@ -3,11 +3,8 @@ const getCurrent = async (req, res) => {
 
   res.json({
     Status: 200,
-    ContentType: "application/json",
-    ResponseBody: {
-      email,
-      subscription,
-    },
+    email,
+    subscription,
   });
 };
 

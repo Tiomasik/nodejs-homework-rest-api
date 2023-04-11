@@ -4,6 +4,7 @@ const Joi = require("joi");
 const { mongooseError } = require("../middlewares");
 
 const validateNumber = /\(\d{3}\) \d{3}-\d{4}$/;
+const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 const contactSchema = new Schema(
   {
@@ -13,7 +14,7 @@ const contactSchema = new Schema(
     },
     email: {
       type: String,
-      match: /\w+@\w+\.\w{2,3}$/,
+      match: validateEmail,
     },
     phone: {
       type: String,
@@ -37,14 +38,14 @@ const Contact = model("contact", contactSchema);
 
 const postSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().email().required(),
+  email: Joi.string().pattern(validateEmail).required(),
   phone: Joi.string().pattern(validateNumber).required(),
   favorite: Joi.boolean().default(false),
 });
 
 const putSchema = Joi.object({
   name: Joi.string(),
-  email: Joi.string().email(),
+  email: Joi.string().pattern(validateEmail),
   phone: Joi.string().pattern(validateNumber),
   favorite: Joi.boolean().default(false),
 });

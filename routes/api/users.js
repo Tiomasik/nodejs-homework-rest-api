@@ -5,10 +5,6 @@ const { ctrlUsers } = require("../../controllers");
 const { validation, ctrlWrapper } = require("../../middlewares");
 const { schema } = require("../../models/user");
 
-// router.get("/", ctrlWrapper(ctrl.getAllContacts));
-
-// router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getContactById));
-
 router.post(
   "/register",
   validation(schema.registerSchema),
@@ -33,20 +29,11 @@ router.post(
   ctrlWrapper(ctrlUsers.logoutUser)
 );
 
-// router.put(
-//   "/:contactId",
-//   isValidId,
-//   validation(schema.putSchema),
-//   ctrlWrapper(ctrl.updateContact)
-// );
-
-// router.patch(
-//   "/:contactId/favorite",
-//   isValidId,
-//   validation(schema.patchFavoriteSchema),
-//   ctrlWrapper(ctrl.updateStatusContact)
-// );
-
-// router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
+router.patch(
+  "/",
+  ctrlUsers.authenticate,
+  validation(schema.patchSchema),
+  ctrlWrapper(ctrlUsers.updateSubscriptionUser)
+);
 
 module.exports = router;

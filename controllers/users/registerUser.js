@@ -17,12 +17,9 @@ const registerUser = async (req, res) => {
 
   res.status(201).json({
     Status: 201,
-    ContentType: "application/json",
-    ResponseBody: {
-      user: {
-        email: result.email,
-        subscription: result.subscription,
-      },
+    user: {
+      email: result.email,
+      subscription: result.subscription,
     },
   });
 };

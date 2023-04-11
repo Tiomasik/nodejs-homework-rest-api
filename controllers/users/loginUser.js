@@ -31,13 +31,10 @@ const loginUser = async (req, res) => {
 
   res.json({
     Status: 200,
-    ContentType: "application/json",
-    ResponseBody: {
-      token,
-      user: {
-        email: user.email,
-        subscription: user.subscription,
-      },
+    token,
+    user: {
+      email: user.email,
+      subscription: user.subscription,
     },
   });
 };
