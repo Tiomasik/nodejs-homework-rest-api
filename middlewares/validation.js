@@ -1,12 +1,12 @@
-const validation = (contactsSchema) => {
+const validation = (validateSchema) => {
   return (req, __, next) => {
-    const { error } = contactsSchema.validate(req.body);
+    const { error } = validateSchema.validate(req.body);
 
     if (error) {
       error.status = 400;
       next(error);
     }
-    
+
     next();
   };
 };
