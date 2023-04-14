@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const { User } = require("../../models/user");
 
-const { SECRET_KEY } = process.env;
+const SECRET_KEY = "zxcvbnmasdfghjqwertyu";
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
