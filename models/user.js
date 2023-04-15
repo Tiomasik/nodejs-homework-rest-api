@@ -18,6 +18,9 @@ const userSchema = new Schema(
       marginLeft: 8,
       required: [true, "Set password for user"],
     },
+    avatarURL: {
+      type: String,
+    },
     subscription: {
       type: String,
       enum: ["starter", "pro", "business"],
