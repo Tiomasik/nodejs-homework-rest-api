@@ -5,7 +5,6 @@ const { ctrlContacts } = require("../../controllers");
 const { validation, ctrlWrapper, isValidId } = require("../../middlewares");
 const { ctrlUsers } = require("../../controllers");
 const { schema } = require("../../models/contact");
-const { upload } = require("../../middlewares");
 
 router.get(
   "/",
@@ -23,7 +22,6 @@ router.get(
 router.post(
   "/",
   ctrlUsers.authenticate,
-  upload.single("cover"),
   validation(schema.postSchema),
   ctrlWrapper(ctrlContacts.addContact)
 );
