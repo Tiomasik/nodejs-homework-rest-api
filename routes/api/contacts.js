@@ -1,14 +1,11 @@
 const express = require("express");
 const router = express.Router();
-// const fs = require("fs/promises");
-// const path = require("path");
 
 const { ctrlContacts } = require("../../controllers");
 const { validation, ctrlWrapper, isValidId } = require("../../middlewares");
 const { ctrlUsers } = require("../../controllers");
 const { schema } = require("../../models/contact");
 const { upload } = require("../../middlewares");
-// const tempDir = require("../../path");
 
 router.get(
   "/",
@@ -23,28 +20,11 @@ router.get(
   ctrlWrapper(ctrlContacts.getContactById)
 );
 
-// router.post(
-//   "/",
-//   ctrlUsers.authenticate,
-//   upload.single("cover"),
-//   validation(schema.postSchema),
-//   ctrlWrapper(ctrlContacts.addContact)
-// );
-// const rootDir = path.dirname(tempDir);
-// const pathAvatars = path.join(rootDir, "public", "avatars");
-// console.log(pathAvatars);
 router.post(
   "/",
   ctrlUsers.authenticate,
   upload.single("cover"),
-  // async (req, res) => {
-  //   // console.log(req.body);
-  //   // console.log(req.file);
-  //   const { path: tmpUpload, originalname } = req.file;
-  //   const resultUpload = path.join(pathAvatars, originalname);
-  //   await fs.rename(tmpUpload, resultUpload);
-  //   const cover = path.join("public", "avatars", originalname);
-  // }
+  validation(schema.postSchema),
   ctrlWrapper(ctrlContacts.addContact)
 );
 
