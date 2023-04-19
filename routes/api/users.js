@@ -17,7 +17,7 @@ router.get("/verify/:verificationToken", ctrlWrapper(ctrlUsers.verifyEmail));
 router.post(
   "/verify",
   validation(schema.emailSchema),
-  ctrlWrapper(ctrlUsers.resendEVerifyEmail)
+  ctrlWrapper(ctrlUsers.resendVerifyEmail)
 );
 
 router.post(

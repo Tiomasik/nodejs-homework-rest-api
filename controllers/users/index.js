@@ -6,7 +6,7 @@ const logoutUser = require("./logoutUser");
 const updateSubscriptionUser = require("./updateSubscriptionUser");
 const updateAvatar = require("./updateAvatar");
 const verifyEmail = require("./verifyEmail");
-const resendEVerifyEmail = require("./resendEVerifyEmail");
+const resendVerifyEmail = require("./resendVerifyEmail");
 
 module.exports = {
   registerUser,
@@ -17,5 +17,5 @@ module.exports = {
   updateSubscriptionUser,
   updateAvatar,
   verifyEmail,
-  resendEVerifyEmail,
+  resendVerifyEmail,
 };
